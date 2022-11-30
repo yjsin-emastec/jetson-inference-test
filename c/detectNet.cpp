@@ -48,7 +48,7 @@
 detectNet::detectNet( float meanPixel ) : tensorNet()
 {
 	mMeanPixel = meanPixel;
-	mLineWidth = 2.0f;
+	mLineWidth = 5.0f;	// origin : 2.0f;
 	
 	mNumClasses  = 0;
 	mClassColors = NULL;
