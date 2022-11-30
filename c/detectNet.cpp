@@ -388,6 +388,9 @@ detectNet* detectNet::Create( const commandLine& cmdLine )
 
 	// set some additional options
 	net->SetOverlayAlpha(cmdLine.GetFloat("alpha", DETECTNET_DEFAULT_ALPHA));
+	net->SetOverlayRed(cmdLine.GetFloat("red", DETECTNET_DEFAULT_RED));
+	net->SetOverlayGreen(cmdLine.GetFloat("green", DETECTNET_DEFAULT_GREEN));
+	net->setOverlayBlue(cmdLine.GetFloat("blue", DETECTNET_DEFAULT_BLUE));
 	net->SetClusteringThreshold(cmdLine.GetFloat("clustering", DETECTNET_DEFAULT_CLUSTERING_THRESHOLD));
 	
 	return net;
@@ -983,6 +986,13 @@ bool detectNet::Overlay( void* input, void* output, uint32_t width, uint32_t hei
 	// bounding box overlay
 	if( flags & OVERLAY_BOX )
 	{
+		#if 0	// change object color
+		//SetClassColor(0, 255.0f, 0.0f, 0.0f, 255.0f);
+		//SetClassColor(1, 255.0f, 0.0f, 0.0f, 120.0f);
+		//SetClassColor(2, 255.0f, 0.0f, 0.0f, 255.0f);
+		//SetClassColor(3, 255.0f, 0.0f, 0.0f, 255.0f);
+		#endif
+
 		if( CUDA_FAILED(cudaDetectionOverlay(input, output, width, height, format, detections, numDetections, mClassColors)) )
 			return false;
 	}
@@ -1114,4 +1124,31 @@ void detectNet::SetOverlayAlpha( float alpha )
 
 	for( uint32_t n=0; n < numClasses; n++ )
 		mClassColors[n].w = alpha;
+}
+
+// SetOverlayRed
+void detectNet::SetOverlayRed( float red )
+{
+	const uint32_t numClasses = GetNumClasses();
+
+	for( uint32_t n=0; n < numClasses; n++ )
+		mClassColors[n].x = red;
+}
+
+// SetOverlayGreen
+void detectNet::SetOverlayGreen( float green )
+{
+	const uint32_t numClasses = GetNumClasses();
+
+	for( uint32_t n=0; n < numClasses; n++ )
+		mClassColors[n].y = green;
+}
+
+// SetOverlayBlue
+void detectNet::setOverlayBlue( float blue )
+{
+	const uint32_t numClasses = GetNumClasses();
+
+	for( uint32_t n=0; n < numClasses; n++ )
+		mClassColors[n].z = blue;
 }

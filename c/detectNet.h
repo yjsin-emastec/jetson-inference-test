@@ -71,6 +71,14 @@
 #define DETECTNET_DEFAULT_ALPHA 120
 
 /**
+ * Default RGB Color value used during overlay
+ * @ingroup detectNet
+ */
+#define DETECTNET_DEFAULT_RED 255
+#define DETECTNET_DEFAULT_GREEN 0
+#define DETECTNET_DEFAULT_BLUE 0
+
+/**
  * Standard command-line options able to be passed to detectNet::Create()
  * @ingroup imageNet
  */
@@ -498,7 +506,14 @@ public:
  	 * Set overlay alpha blending value for all classes (between 0-255).
 	 */
 	void SetOverlayAlpha( float alpha );
-	
+
+	/**
+ 	 * Set overlay RGB Color value for all classes (between 0-255).
+	 */
+	void SetOverlayRed(float red);
+	void SetOverlayGreen(float green);
+	void setOverlayBlue(float blue);
+
 protected:
 
 	// constructor
