@@ -1,7 +1,11 @@
-build/
-data/networks/
 data/images/test
 data/images/qa/results
 logs/
 *.pyc
 *.tar.gz
+build/CMakeCache.txt/
+build/CMakeFiles/jetson-inference.dir/c/
+build/aarch64/include/jetson-inference/
+build/aarch64/lib/
+build/python/
+build/utils/
